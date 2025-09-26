@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNow About Your Pizza</title>
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
+.overlay {
+  background: rgba(0,0,0,0.7);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.container {
+  background: rgba(255, 69, 0, 0.9);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+h1 { margin-bottom: 20px; font-size: 2rem; text-shadow: 2px 2px 4px #000; }
+select, button {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+button {
+  background: #ffd700;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover { background: #ffae00; }
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #fff;
+  color: #000;
+  font-size: 1rem;
+  text-align: left;
+}
+</style>
+</head>
+<body>
+<div class="overlay">
+  <div class="container">
+    <h1>🍕 Know About Your Pizza 🍕</h1>
+    <label for="pizza">Choose Pizza:</label>
+    <select id="pizza">
+      <option value="Spicy Tango Cheese Pizza">Spicy Tango Cheese Pizza</option>
+      <option value="Double Cheese Margherita">Double Cheese Margherita</option>
+      <option value="FarmFresh Pizza">FarmFresh Pizza</option>
+      <option value="Green Mexican Pizza">Green Mexican Pizza</option>
+      <option value="Country Feast Pizza">Country Feast Pizza</option>
+      <option value="Peppy Paneer Pizza">Peppy Paneer Pizza</option>
+      <option value="Veg Paradise Pizza">Veg Paradise Pizza</option>
+      <option value="Full Spicy Pizza">Full Spicy Pizza</option>
+      <option value="Extravaganza Feast Pizza">Extravaganza Feast Pizza</option>
+      <option value="Veggie Lover Pizza">Veggie Lover Pizza</option>
+      <option value="Veg Deluxe Pizza">Veg Deluxe Pizza</option>
+    </select>
+    <br>
+    <label for="size">Choose Size:</label>
+    <select id="size">
+      <option value="Small">Small</option>
+      <option value="Medium">Medium</option>
+      <option value="Large">Large</option>
+    </select>
+    <br>
+    <button onclick="showNutrition()">Show Nutrition</button>
+    <div class="result" id="result">Nutrition values will appear here...</div>
+  </div>
+</div>
+
+<script>
+const nutritionData = {
+  "Spicy Tango Cheese Pizza": {
+    Small: {Calories: 514, Protein: 34.5, Carbohydrates: 68.9, Fibre: 15.4, Fat: 12},
+    Medium: {Calories: 685.8, Protein: 46.1, Carbohydrates: 98.1, Fibre: 20.4, Fat: 14.4},
+    Large: {Calories: 857.1, Protein: 57.6, Carbohydrates: 114.7, Fibre: 25.5, Fat: 18}
+  },
+  "Double Cheese Margherita": {
+    Small: {Calories: 543, Protein: 39.3, Carbohydrates: 63.4, Fibre: 15.4, Fat: 12},
+    Medium: {Calories: 724.8, Protein: 52.1, Carbohydrates: 57.1, Fibre: 18.4, Fat: 14.4},
+    Large: {Calories: 904.1, Protein: 65.6, Carbohydrates: 105.7, Fibre: 23.5, Fat: 23.2}
+  },
+  "FarmFresh Pizza": {
+    Small: {Calories: 500.8, Protein: 34.3, Carbohydrates: 65.4, Fibre: 14.4, Fat: 10.6},
+    Medium: {Calories: 667.8, Protein: 46.1, Carbohydrates: 87.1, Fibre: 19.4, Fat: 14.4},
+    Large: {Calories: 834.1, Protein: 57.6, Carbohydrates: 109.7, Fibre: 24.5, Fat: 17.7}
+  },
+  "Green Mexican Pizza": {
+    Small: {Calories: 506.8, Protein: 34.3, Carbohydrates: 67.4, Fibre: 15.4, Fat: 10.6},
+    Medium: {Calories: 675.8, Protein: 46.1, Carbohydrates: 89.1, Fibre: 20.4, Fat: 14.4},
+    Large: {Calories: 844.1, Protein: 57.6, Carbohydrates: 111.7, Fibre: 25.5, Fat: 17.7}
+  },
+  "Country Feast Pizza": {
+    Small: {Calories: 504.8, Protein: 34.3, Carbohydrates: 66.4, Fibre: 15.4, Fat: 10.6},
+    Medium: {Calories: 672.8, Protein: 45.1, Carbohydrates: 88.1, Fibre: 19.4, Fat: 14.4},
+    Large: {Calories: 841.1, Protein: 57.6, Carbohydrates: 111.7, Fibre: 24.5, Fat: 17.7}
+  },
+  "Peppy Paneer Pizza": {
+    Small: {Calories: 554.8, Protein: 38.3, Carbohydrates: 66.4, Fibre: 14.4, Fat: 14.6},
+    Medium: {Calories: 738.8, Protein: 50.1, Carbohydrates: 88.1, Fibre: 19.4, Fat: 19.4},
+    Large: {Calories: 923.1, Protein: 63.6, Carbohydrates: 110.7, Fibre: 24.5, Fat: 26.7}
+  },
+  "Veg Paradise Pizza": {
+    Small: {Calories: 525.8, Protein: 34.3, Carbohydrates: 69.4, Fibre: 15.4, Fat: 11.6},
+    Medium: {Calories: 700.8, Protein: 46.1, Carbohydrates: 92.1, Fibre: 20.4, Fat: 15.4},
+    Large: {Calories: 875.1, Protein: 57.6, Carbohydrates: 115.7, Fibre: 25.5, Fat: 19.7}
+  },
+  "Full Spicy Pizza": {
+    Small: {Calories: 515.8, Protein: 36.3, Carbohydrates: 67.4, Fibre: 15.4, Fat: 11.6},
+    Medium: {Calories: 678.8, Protein: 46.1, Carbohydrates: 89.1, Fibre: 20.4, Fat: 15.4},
+    Large: {Calories: 858.1, Protein: 57.6, Carbohydrates: 111.7, Fibre: 25.5, Fat: 19.7}
+  },
+  "Extravaganza Feast Pizza": {
+    Small: {Calories: 521.8, Protein: 35.3, Carbohydrates: 70.4, Fibre: 15.4, Fat: 10.6},
+    Medium: {Calories: 695.8, Protein: 47.1, Carbohydrates: 93.1, Fibre: 20.4, Fat: 14.4},
+    Large: {Calories: 869.1, Protein: 58.6, Carbohydrates: 117.7, Fibre: 26.5, Fat: 18.7}
+  },
+  "Veggie Lover Pizza": {
+    Small: {Calories: 509.8, Protein: 34.3, Carbohydrates: 67.4, Fibre: 15.4, Fat: 10.6},
+    Medium: {Calories: 678.8, Protein: 46.1, Carbohydrates: 90.1, Fibre: 20.4, Fat: 14.4},
+    Large: {Calories: 848.1, Protein: 58.6, Carbohydrates: 112.7, Fibre: 25.5, Fat: 17.7}
+  },
+  "Veg Deluxe Pizza": {
+    Small: {Calories: 572.8, Protein: 38.3, Carbohydrates: 70.4, Fibre: 15.4, Fat: 14.6},
+    Medium: {Calories: 762.8, Protein: 51.1, Carbohydrates: 93.1, Fibre: 20.4, Fat: 15.4},
+    Large: {Calories: 952.1, Protein: 64.6, Carbohydrates: 116.7, Fibre: 26.5, Fat: 24.7}
+  }
+};
+
+
+function showNutrition() {
+  const pizza = document.getElementById("pizza").value;
+  const size = document.getElementById("size").value;
+  const data = nutritionData[pizza][size];
+
+  if (!data) {
+    document.getElementById("result").innerHTML = "Nutrition data not available!";
+    return;
+  }
+
+  document.getElementById("result").innerHTML = `
+    <h3>Nutrition Summary (${size}):</h3>
+    <p><b>Calories:</b> ${data.Calories} kcal</p>
+    <p><b>Protein:</b> ${data.Protein} g</p>
+    <p><b>Carbohydrates:</b> ${data.Carbohydrates} g</p>
+    <p><b>Fibre:</b> ${data.Fibre} g</p>
+    <p><b>Fat:</b> ${data.Fat} g</p>
+  `;
+}
+</script>
+</body>
+</html>
+ 
